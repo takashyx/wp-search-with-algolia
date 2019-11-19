@@ -24,11 +24,13 @@ require_once ALGOLIA_PATH . 'includes/indices/class-algolia-searchable-posts-ind
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-posts-index.php';
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-terms-index.php';
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-users-index.php';
+require_once ALGOLIA_PATH . 'includes/indices/class-algolia-usermeta-index.php';
 
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-post-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-term-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-user-changes-watcher.php';
+require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-usermeta-changes-watcher.php';
 
 if ( is_admin() ) {
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin.php';
