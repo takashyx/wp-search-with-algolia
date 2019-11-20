@@ -14,6 +14,9 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 		return __( 'Usermeta' );
 	}
 
+	/**
+	 * @return array all usermeta.
+	 */
 	protected function get_all_usermeta( $args ) {
 		// $args = array(
 		// 	'order'   => 'ASC',
@@ -23,27 +26,46 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 		// );
 
 		global $wpdb;
-		$result = $wpdb->get_results(
-			"
-			SELECT * FROM {$wpdb->usermeta}
-			ORDER BY {$args->orderby} {$args->order}
-			OFFSET {$args->offset}
-			LIMIT {$args->number}
-			",
-			ARRAY_N
-		);
-		return $result;
+		$wpdb->show_errors = TRUE;
+		$sql = "SELECT * FROM $wpdb->usermeta ORDER BY {$args['orderby']} {$args['order']} LIMIT {$args['offset']}, {$args['number']};";
+
+		$results = $wpdb->get_results($sql);
+		if(! $results){
+			$wpdb->print_error();
+			// Or you can choose to show the last tried query.
+			echo $wpdb->last_query;
+			_log($wpdb->last_query);
+			_log("sql: {$sql}");
+		}
+
+		return $results;
 	}
 
+	/**
+	 * @return int all usermeta count.
+	 */
 	protected function count_all_usermeta() {
 		global $wpdb;
-		$result = $wpdb->get_row(
-			"
-			SELECT umeta_id, COUNT(umeta_id) as c
-			FROM {$wpdb->usermeta}",
-			ARRAY_N
-		);
-		return $result->c;
+		$wpdb->show_errors = TRUE;
+		$result = $wpdb->get_row( "SELECT COUNT(*) as c FROM $wpdb->usermeta");
+		if(! $result){
+			$wpdb->print_error();
+			// Or you can choose to show the last tried query.
+			echo $wpdb->last_query;
+			_log($wpdb->last_query);
+		}
+		return (int) $result->c;
+	}
+
+	/**
+	 * @param $user_id
+	 *
+	 * @return string url for user profile page
+	 */
+	protected function get_profile_url($username){
+		$modified_user_name = str_replace(" ", "+", $username);
+		$result = home_url('/user/') . $modified_user_name;
+		return $result;
 	}
 
 	/**
@@ -52,8 +74,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	 * @return bool
 	 */
 	protected function should_index( $item ) {
-		$should_index = (int) count(get_user_meta( $item->umeta_id )) > 0;
-		return (bool) apply_filters( 'algolia_should_index_usermeta', $should_index, $item );
+		return true;
 	}
 
 	/**
@@ -64,9 +85,14 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	protected function get_records( $item ) {
 		$record                 = array();
 		$record['objectID']     = $item->umeta_id;
+		$record['umeta_id']     = $item->umeta_id;
 		$record['user_id']      = $item->user_id;
 		$record['meta_key']      = $item->meta_key;
+		$record['user_name']    = get_userdata($item->user_id)->user_login;
+		$record['posts_url']    = $this->get_profile_url($record['user_name']);
 		$record['meta_value']      = $item->meta_value;
+
+
 
 		$record = (array) apply_filters( 'algolia_usermeta_record', $record, $item );
 
@@ -77,7 +103,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	 * @return int
 	 */
 	protected function get_re_index_items_count() {
-		$usermeta_count = count_all_usermeta();
+		$usermeta_count = $this->count_all_usermeta();
 		return (int) $usermeta_count;
 	}
 
@@ -89,7 +115,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	protected function get_settings() {
 		$settings = array(
 			'attributesToIndex' => array(
-				'unordered(user_id)',
+				'unordered(meta_value)',
 			),
 			'customRanking'     => array(
 				'desc(user_id)',
@@ -110,7 +136,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	 * @return string
 	 */
 	public function get_id() {
-		return 'usersmeta';
+		return 'usermeta';
 	}
 
 
@@ -131,7 +157,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 		);
 
 		// We use prior to 4.5 syntax for BC purposes, no `paged` arg.
-		return get_all_usermeta( $args );
+		return $this->get_all_usermeta( $args );
 	}
 
 	/**
@@ -145,12 +171,12 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	 * @return bool
 	 */
 	public function supports( $item ) {
-		return $item instanceof WP_User;
+		return true;
 	}
 
 	public function get_default_autocomplete_config() {
 		$config = array(
-			'position'        => 30,
+			'position'        => 40,
 			'max_suggestions' => 3,
 			'tmpl_suggestion' => 'autocomplete-usermeta-suggestion',
 		);

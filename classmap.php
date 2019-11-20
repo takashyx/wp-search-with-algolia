@@ -18,6 +18,7 @@ require_once ALGOLIA_PATH . 'includes/class-algolia-settings.php';
 require_once ALGOLIA_PATH . 'includes/class-algolia-template-loader.php';
 require_once ALGOLIA_PATH . 'includes/class-algolia-utils.php';
 
+// index
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-index.php';
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-index-replica.php';
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-searchable-posts-index.php';
@@ -26,12 +27,14 @@ require_once ALGOLIA_PATH . 'includes/indices/class-algolia-terms-index.php';
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-users-index.php';
 require_once ALGOLIA_PATH . 'includes/indices/class-algolia-usermeta-index.php';
 
+// watcher
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-post-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-term-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-user-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-usermeta-changes-watcher.php';
 
+//admin
 if ( is_admin() ) {
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin.php';
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-autocomplete.php';

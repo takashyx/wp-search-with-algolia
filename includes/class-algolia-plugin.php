@@ -209,6 +209,9 @@ class Algolia_Plugin {
 		// Add the users index.
 		$this->indices[] = new Algolia_Users_Index();
 
+		// Add the usermeta index.
+		$this->indices[] = new Algolia_Usermeta_Index();
+
 		// Allow developers to filter the indices.
 		$this->indices = (array) apply_filters( 'algolia_indices', $this->indices );
 
@@ -225,6 +228,8 @@ class Algolia_Plugin {
 					$this->changes_watchers[] = new Algolia_Term_Changes_Watcher( $index );
 				} elseif ( $index->contains_only( 'users' ) ) {
 					$this->changes_watchers[] = new Algolia_User_Changes_Watcher( $index );
+				} elseif ( $index->contains_only( 'usermeta' ) ) {
+					$this->changes_watchers[] = new Algolia_Usermeta_Changes_Watcher( $index );
 				}
 			}
 		}

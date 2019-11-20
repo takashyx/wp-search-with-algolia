@@ -14,6 +14,7 @@
 			<section class="ais-facets" id="facet-categories"></section>
 			<section class="ais-facets" id="facet-tags"></section>
 			<section class="ais-facets" id="facet-users"></section>
+			<section class="ais-facets" id="facet-usermeta"></section>
 		</aside>
 	</div>
 
@@ -172,6 +173,19 @@
 						limit: 10,
 						templates: {
 							header: '<h3 class="widgettitle">Authors</h3>'
+						}
+					})
+				);
+
+				/* Usermeta refinement widget */
+				search.addWidget(
+					instantsearch.widgets.menu({
+						container: '#facet-usermeta',
+						attributeName: 'user_name',
+						sortBy: ['isRefined:desc', 'count:desc', 'name:asc'],
+						limit: 10,
+						templates: {
+							header: '<h3 class="widgettitle">Usermeta</h3>'
 						}
 					})
 				);

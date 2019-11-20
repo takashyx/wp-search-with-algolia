@@ -131,6 +131,9 @@
 	line-height: 32px;
 }
 
+.aa-dropdown-menu a.suggestion-link.usermeta-suggestion-link {
+	line-height: 32px;
+}
 
 .aa-dropdown-menu a.suggestion-link svg {
 	vertical-align: middle;

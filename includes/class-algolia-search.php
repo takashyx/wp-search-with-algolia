@@ -78,6 +78,7 @@ class Algolia_Search {
 		$this->nb_hits = $results['nbHits'];
 
 		$post_ids = array();
+
 		foreach ( $results['hits'] as $result ) {
 			$post_ids[] = $result['post_id'];
 		}
@@ -99,7 +100,6 @@ class Algolia_Search {
 				$post_types = $post_type->name;
 			}
 		}
-
 		$query->set( 'post_type', $post_types );
 		$query->set( 'post__in', $post_ids );
 		$query->set( 'orderby', 'post__in' );
