@@ -42,6 +42,8 @@
 </script>
 
 <script type="text/html" id="tmpl-autocomplete-usermeta-suggestion">
+<!-- TODO: create a blacklist/whitelist function here -->
+  <# if (['nickname', 'first_name', 'last_name', 'description', 'locale'].indexOf( data.meta_key) >= 0 ) { #>
   <a class="suggestion-link post-suggestion-link" href="{{ data.posts_url }}" title="{{ data.user_name }}">
 	<div class="suggestion-post-attributes">
 		<span class="suggestion-post-title">{{{ data.user_name }}}</span>
@@ -50,6 +52,7 @@
 		<# } #>
 	</div>
   </a>
+  <# } #>
 </script>
 
 <script type="text/html" id="tmpl-autocomplete-footer">
@@ -140,6 +143,7 @@
 			  hit._snippetResult[key].value = hit._snippetResult[key].value.replace(/__ais-highlight__/g, '<em>').replace(/__\/ais-highlight__/g, '</em>');
 			}
 
+			console.log(hit);
 			return suggestion_template(hit);
 		  }
 		}

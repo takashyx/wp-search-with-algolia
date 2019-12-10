@@ -151,7 +151,6 @@ class Algolia_Admin_Page_Native_Search {
 		$indices = $this->plugin->get_indices(
 			array(
 				'enabled'  => true,
-				'contains' => 'posts',
 			)
 		);
 

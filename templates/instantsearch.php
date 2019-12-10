@@ -20,7 +20,7 @@
 
 	<script type="text/html" id="tmpl-instantsearch-hit">
 		<article itemtype="http://schema.org/Article">
-			<# if ( data.images.thumbnail ) { #>
+			<# if ( data.images && data.images.thumbnail ) { #>
 			<div class="ais-hits--thumbnail">
 				<a href="{{ data.permalink }}" title="{{ data.post_title }}">
 					<img src="{{ data.images.thumbnail.url }}" alt="{{ data.post_title }}" title="{{ data.post_title }}" itemprop="image" />
@@ -29,14 +29,25 @@
 			<# } #>
 
 			<div class="ais-hits--content">
+			<# if ( data.permalink ) { #>
 				<h2 itemprop="name headline"><a href="{{ data.permalink }}" title="{{ data.post_title }}" itemprop="url">{{{ data._highlightResult.post_title.value }}}</a></h2>
 				<div class="excerpt">
 					<p>
-			<# if ( data._snippetResult['content'] ) { #>
+			<# if ( data._snippetResult && data._snippetResult['content'] ) { #>
 			  <span class="suggestion-post-content">{{{ data._snippetResult['content'].value }}}</span>
 			<# } #>
 					</p>
 				</div>
+			<# } else { #>
+				<h2 itemprop="name headline"><a href="{{ data.posts_url }}" title="{{ data.user_name }}" itemprop="url">{{{ data.user_name }}}</a></h2>
+				<div class="excerpt">
+					<p>
+			<# if ( data._highlightResult && data._highlightResult.meta_value['value'] ) { #>
+			  <span class="suggestion-post-content">{{{ data._highlightResult.meta_value['value'] }}}</span>
+			<# } #>
+					</p>
+				</div>
+			<# } #>
 			</div>
 			<div class="ais-clearfix"></div>
 		</article>
@@ -55,7 +66,7 @@
 				var search = instantsearch({
 					appId: algolia.application_id,
 					apiKey: algolia.search_api_key,
-					indexName: algolia.indices.searchable_posts.name,
+					indexName: algolia.indices.usermeta.name,
 					urlSync: {
 						mapping: {'q': 's'},
 						trackedParameters: ['query']
@@ -109,7 +120,9 @@
 								}
 
 								hit._highlightResult = replace_highlights_recursive(hit._highlightResult);
-								hit._snippetResult = replace_highlights_recursive(hit._snippetResult);
+								if (hit._snippetResult) {
+									hit._snippetResult = replace_highlights_recursive(hit._snippetResult);
+								}
 
 								return hit;
 							}
