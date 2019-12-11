@@ -67,8 +67,6 @@ class Algolia_Admin_Page_Usermeta{
 	}
 
 	public function usermeta_whitelist_callback() {
-		$value = $this->plugin->get_settings()->get_usermeta_whitelist();
-
 		require_once dirname( __FILE__ ) . '/partials/form-usermeta-whitelist.php';
 	}
 	/**
@@ -79,29 +77,22 @@ class Algolia_Admin_Page_Usermeta{
 	public function sanitize_usermeta_whitelist( $value ) {
 
 		// check the value here
-		if ( 'test1' === $value ) {
-			add_settings_error(
-				$this->option_group,
-				'test1_enabled',
-				esc_html__( 'test1 enabled!', 'wp-search-with-algolia' ),
-				'updated'
-			);
-		} elseif ( 'test2' === $value ) {
-			add_settings_error(
-				$this->option_group,
-				'test2_enabled',
-				esc_html__( 'test2 enabled!', 'wp-search-with-algolia' ),
-				'updated'
-			);
-		} else {
-			$value = 'other';
-			add_settings_error(
-				$this->option_group,
-				'test_other_enabled',
-				esc_html__( 'test other enabled!', 'wp-search-with-algolia' ),
-				'updated'
-			);
-		}
+		// if ( is_array($value) ) {
+		// 	add_settings_error(
+		// 		$this->option_group,
+		// 		'value_is_array',
+		// 		esc_html__( 'whitelist settings updated: '.$value, 'wp-search-with-algolia' ),
+		// 		'updated'
+		// 	);
+		// } else {
+		// 	$value = '[]';
+		// 	add_settings_error(
+		// 		$this->option_group,
+		// 		'whitelist_is_empty',
+		// 		esc_html__( 'No item in the whitelist. Please Add.', 'wp-search-with-algolia' ),
+		// 		'error'
+		// 	);
+		// }
 
 		return $value;
 	}
@@ -123,7 +114,6 @@ class Algolia_Admin_Page_Usermeta{
 			return;
 		}
 
-		// TODO:
 		$settings = $this->plugin->get_settings();
 	}
 
