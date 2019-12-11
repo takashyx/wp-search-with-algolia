@@ -34,10 +34,11 @@ require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-term-changes-watche
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-user-changes-watcher.php';
 require_once ALGOLIA_PATH . 'includes/watchers/class-algolia-usermeta-changes-watcher.php';
 
-//admin
+// admin
 if ( is_admin() ) {
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin.php';
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-autocomplete.php';
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-native-search.php';
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-settings.php';
+	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-usermeta.php';
 }

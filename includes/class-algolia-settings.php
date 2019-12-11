@@ -142,6 +142,12 @@ class Algolia_Settings {
 		return $search_type;
 	}
 
+	public function get_usermeta_whitelist() {
+		$search_type = get_option( 'algolia_usermeta_whitelist', 'test1' );
+
+		return $search_type;
+	}
+
 	/**
 	 * @return bool
 	 */
