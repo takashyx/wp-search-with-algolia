@@ -78,6 +78,7 @@ class Algolia_Admin_Page_Usermeta{
 	 */
 	public function sanitize_usermeta_whitelist( $value ) {
 
+		// check the value here
 		if ( 'test1' === $value ) {
 			add_settings_error(
 				$this->option_group,

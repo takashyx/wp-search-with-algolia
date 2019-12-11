@@ -1,26 +1,28 @@
-<div class="input-">
-	<label>
-		<input type="checkbox" value="test1"
-			name="chk_test" <?php checked( $value, 'native' ); ?>>
-		<?php esc_html_e( 'test title 1', 'wp-search-with-algolia' ); ?>
-	</label>
-	<div class="checkbox-info">
-		<?php
-		echo wp_kses(
-			__(
-				'test 1 description.',
-				'wp-search-with-algolia'
-			),
-			[
-				'br' => [],
-			]
-		);
-		?>
-	</div>
+<script type="text/javascript">
 
-	<label>
-		<input type="checkbox" value="test2"
-			name="algolia_override_native_search" <?php checked( $value, 'test2' ); ?>>
-		<?php esc_html_e( 'test2', 'wp-search-with-algolia' ); ?>
-	</label>
+	//「ADD」を押したら増やす
+	jQuery(function() {
+		jQuery(document).on("click",'#btn_add_textbox', function(){
+			jQuery('#input-text-list').append( '<li class="whitelist-item"><label><input type="textbox" class="form-control" name="whitelist[]"><button type="button" id="btn_remove_textbox" class="button btn-primary remove">delete</button></label></li>');
+		});
+		//「REMOVE」を押したら減らす
+		jQuery(document).on('click','.remove', function(){
+			jQuery(this).closest('.whitelist-item').remove();
+		});
+	});
+
+</script>
+
+<button type="button" id="btn_add_textbox" class="button btn btn-primary">add textbox</button>
+
+<div>
+	<ul id="input-text-list">
+		<!-- //TODO populate from setings -->
+		<li class="whitelist-item">
+			<label>
+				<input type="textbox" class="form-control" name="whitelist[]">
+				<button type="button" id="btn_remove_textbox" class="button btn-primary remove">delete</button>
+			</label>
+		</li>
+	</ul>
 </div>
