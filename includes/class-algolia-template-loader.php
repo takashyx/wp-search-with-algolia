@@ -93,6 +93,9 @@ class Algolia_Template_Loader {
 		wp_enqueue_script( 'algolia-autocomplete' );
 		wp_enqueue_script( 'algolia-autocomplete-noconflict' );
 
+		$whitelist = json_decode(get_option('algolia_usermeta_whitelist'));
+		wp_localize_script( 'algolia-autocomplete', 'whitelist_from_php', $whitelist );
+
 		// Allow users to easily enqueue custom styles and scripts.
 		do_action( 'algolia_autocomplete_scripts' );
 	}
