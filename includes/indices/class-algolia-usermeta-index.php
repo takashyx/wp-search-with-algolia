@@ -117,6 +117,9 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 			'attributesToIndex' => array(
 				'unordered(meta_value)',
 			),
+			'attributesForFaceting' => array(
+				'meta_key',
+			),
 			'customRanking'     => array(
 				'desc(user_id)',
 			),

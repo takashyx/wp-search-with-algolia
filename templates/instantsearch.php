@@ -34,7 +34,7 @@
 				<div class="excerpt">
 					<p>
 			<# if ( data._snippetResult && data._snippetResult['content'] ) { #>
-			  <span class="suggestion-post-content">{{{ data._snippetResult['content'].value }}}</span>
+			<span class="suggestion-post-content">{{{ data._snippetResult['content'].value }}}</span>
 			<# } #>
 					</p>
 				</div>
@@ -43,7 +43,7 @@
 				<div class="excerpt">
 					<p>
 			<# if ( data._highlightResult && data._highlightResult.meta_value['value'] ) { #>
-			  <span class="suggestion-post-content">{{{ data._highlightResult.meta_value['value'] }}}</span>
+			<span class="suggestion-post-content">{{{ data._highlightResult.meta_value['value'] }}}</span>
 			<# } #>
 					</p>
 				</div>
@@ -72,6 +72,7 @@
 						trackedParameters: ['query']
 					},
 					searchParameters: {
+						filters: <?php echo '\'meta_key:'.(join(' OR meta_key:',  json_decode(get_option('algolia_usermeta_whitelist')))).'\''; ?>,
 						facetingAfterDistinct: true,
 			highlightPreTag: '__ais-highlight__',
 			highlightPostTag: '__/ais-highlight__'

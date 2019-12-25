@@ -42,8 +42,6 @@
 </script>
 
 <script type="text/html" id="tmpl-autocomplete-usermeta-suggestion">
-<!-- TODO: create a blacklist/whitelist function here -->
-  <# if (whitelist_from_php.indexOf(data.meta_key) >= 0 ) { #>
   <a class="suggestion-link post-suggestion-link" href="{{ data.posts_url }}" title="{{ data.user_name }}">
     <div class="suggestion-post-attributes">
         <span class="suggestion-post-title">{{{ data.user_name }}}</span>
@@ -52,7 +50,6 @@
         <# } #>
     </div>
   </a>
-  <# } #>
 </script>
 
 <script type="text/html" id="tmpl-autocomplete-footer">
@@ -110,7 +107,8 @@
             'content:10'
           ],
           highlightPreTag: '__ais-highlight__',
-          highlightPostTag: '__/ais-highlight__'
+          highlightPostTag: '__/ais-highlight__',
+          filters: <?php echo '\'meta_key:'.(join(' OR meta_key:',  json_decode(get_option('algolia_usermeta_whitelist')))).'\''; ?>,
         }),
         templates: {
           header: function () {
