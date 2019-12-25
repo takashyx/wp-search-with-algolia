@@ -24,7 +24,7 @@ class Algolia_Usermeta_Changes_Watcher implements Algolia_Changes_Watcher {
 			$wpdb->print_error();
 			// Or you can choose to show the last tried query.
 			echo $wpdb->last_query;
-			_log($wpdb->last_query);
+			error_log($wpdb->last_query);
 		}
 		return $results;
 	}

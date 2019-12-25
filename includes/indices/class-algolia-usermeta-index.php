@@ -34,8 +34,8 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 			$wpdb->print_error();
 			// Or you can choose to show the last tried query.
 			echo $wpdb->last_query;
-			_log($wpdb->last_query);
-			_log("sql: {$sql}");
+			error_log($wpdb->last_query);
+			error_log("sql: {$sql}");
 		}
 
 		return $results;
@@ -52,7 +52,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 			$wpdb->print_error();
 			// Or you can choose to show the last tried query.
 			echo $wpdb->last_query;
-			_log($wpdb->last_query);
+			error_log($wpdb->last_query);
 		}
 		return (int) $result->c;
 	}
