@@ -42,9 +42,9 @@
 </script>
 
 <script type="text/html" id="tmpl-autocomplete-usermeta-suggestion">
-  <a class="suggestion-link post-suggestion-link" href="{{ data.posts_url }}" title="{{ data.user_name }}">
+  <a class="suggestion-link post-suggestion-link" href="{{ data.posts_url }}" title="{{ data.display_name }}">
     <div class="suggestion-post-attributes">
-        <span class="suggestion-post-title">{{{ data.user_name }}}</span>
+        <span class="suggestion-post-title">{{{ data.display_name }}}</span>
         <# if ( data._highlightResult['meta_value'] ) { #>
         <span class="suggestion-post-content">{{{ data._highlightResult['meta_value'].value }}}</span>
         <# } #>

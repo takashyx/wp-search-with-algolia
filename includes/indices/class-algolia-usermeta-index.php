@@ -89,6 +89,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 		$record['user_id']      = $item->user_id;
 		$record['meta_key']      = $item->meta_key;
 		$record['user_name']    = get_userdata($item->user_id)->user_login;
+		$record['display_name']    = get_userdata($item->user_id)->display_name;
 		$record['posts_url']    = $this->get_profile_url($record['user_name']);
 		$record['meta_value']    = strip_tags(nl2br($item->meta_value));
 

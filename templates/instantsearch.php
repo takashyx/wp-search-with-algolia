@@ -39,7 +39,7 @@
 					</p>
 				</div>
 			<# } else { #>
-				<h2 itemprop="name headline"><a href="{{ data.posts_url }}" title="{{ data.user_name }}" itemprop="url">{{{ data.user_name }}}</a></h2>
+				<h2 itemprop="name headline"><a href="{{ data.posts_url }}" title="{{ data.display_name }}" itemprop="url">{{{ data.display_name }}}</a></h2>
 				<div class="excerpt">
 					<p>
 			<# if ( data._highlightResult && data._highlightResult.meta_value['value'] ) { #>
