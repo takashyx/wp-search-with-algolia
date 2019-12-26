@@ -41,4 +41,5 @@ if ( is_admin() ) {
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-native-search.php';
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-settings.php';
 	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-usermeta.php';
+	require_once ALGOLIA_PATH . 'includes/admin/class-algolia-admin-page-instantsearch-template.php';
 }

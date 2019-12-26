@@ -21,6 +21,7 @@ class Algolia_Admin {
 			new Algolia_Admin_Page_Autocomplete( $plugin->get_settings(), $this->plugin->get_autocomplete_config() );
 			new Algolia_Admin_Page_Native_Search( $plugin );
 			new Algolia_Admin_Page_Usermeta( $plugin );
+			new Algolia_Admin_Page_Instantsearch_Template( $plugin );
 
 			add_action( 'wp_ajax_algolia_re_index', array( $this, 're_index' ) );
 			add_action( 'wp_ajax_algolia_push_settings', array( $this, 'push_settings' ) );
