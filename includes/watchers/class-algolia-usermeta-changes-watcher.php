@@ -31,7 +31,7 @@ class Algolia_Usermeta_Changes_Watcher implements Algolia_Changes_Watcher {
 
 	public function watch() {
 		// Fires immediately after an existing user is updated.
-		add_action( 'updated_user_meta', array( $this, 'sync_item' ) );
+		add_action( 'profile_update', array( $this, 'sync_item' ) );
 
 		// Fires immediately after a new user is registered.
 		add_action( 'user_register', array( $this, 'sync_item' ) );
@@ -61,7 +61,6 @@ class Algolia_Usermeta_Changes_Watcher implements Algolia_Changes_Watcher {
 				error_log( $exception->getMessage() );
 			}
 		}
-
 	}
 
 	/**
