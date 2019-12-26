@@ -67,8 +67,8 @@ class Algolia_Usermeta_Changes_Watcher implements Algolia_Changes_Watcher {
 	/**
 	 * @param int $umeta_id
 	 */
-	public function delete_item( $umeta_id ) {
-		$usermetas = get_usermetas_by_umetaid( $umeta_id );
+	public function delete_item( $user_id ) {
+		$usermetas = $this->get_usermetas_by_userid( $user_id );
 		foreach($usermetas as $usermeta) {
 			if ( ! $usermeta || ! $this->index->supports( $usermeta ) ) {
 				continue;
