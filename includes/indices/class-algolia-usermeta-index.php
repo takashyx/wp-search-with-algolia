@@ -69,6 +69,27 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 	}
 
 	/**
+	 * @param $user_id
+	 *
+	 * @return string url for user profile photo
+	 */
+	protected function get_profile_thumbnail_image($user_id){
+
+
+		global $wpdb;
+		$wpdb->show_errors = TRUE;
+		$result = $wpdb->get_row( "SELECT meta_value AS p FROM wp_usermeta WHERE meta_key = 'profile_photo' AND user_id = ".$user_id);
+		if(! $result){
+			// return default avatar
+			return 'https://foundx.xsrv.jp/wp-content/plugins/ultimate-member/assets/img/default_avatar.jpg';
+		}
+
+		$filepath = pathinfo($result->p);
+
+		return 'https://foundx.xsrv.jp/wp-content/uploads/ultimatemember/' . $user_id . '/' . $filepath['filename'] . '-80x80.' . $filepath['extension'];
+	}
+
+	/**
 	 * @param $item
 	 *
 	 * @return bool
@@ -92,6 +113,7 @@ final class Algolia_Usermeta_Index extends Algolia_Index {
 		$record['display_name']    = get_userdata($item->user_id)->display_name;
 		$record['posts_url']    = $this->get_profile_url($record['user_name']);
 		$record['meta_value']    = strip_tags(nl2br($item->meta_value));
+		$record['images']['thumbnail']['url'] = $this->get_profile_thumbnail_image($item->user_id);
 
 
 

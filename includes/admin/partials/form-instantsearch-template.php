@@ -9,7 +9,7 @@
 		<# if ( data.images && data.images.thumbnail ) { #>
 		<div class="ais-hits--thumbnail">
 			<a href="{{ data.permalink }}" title="{{ data.post_title }}">
-				<img src="{{ data.images.thumbnail.url }}" alt="{{ data.post_title }}" title="{{ data.post_title }}" itemprop="image" />
+				<img src="{{ data.images.thumbnail.url }}" alt="{{ data.post_title }}" width="80" title="{{ data.post_title }}" itemprop="image" />
 			</a>
 		</div>
 		<# } #>
