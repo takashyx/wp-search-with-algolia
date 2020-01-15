@@ -4,7 +4,7 @@
  * Plugin Name:       WP Search with Algolia MOD
  * Plugin URI:        https://github.com/takashyx/wp-search-with-algolia
  * Description:       Integrate the powerful Algolia search service with WordPress (with profile indexing MOD)
- * Version:           1.1.0-mod-v1.3
+ * Version:           1.1.0-mod-v1.4
  * Author:            takashyx
  * Author URI:        https://takashyx.com
  * License:           GNU General Public License v2.0 / MIT License
