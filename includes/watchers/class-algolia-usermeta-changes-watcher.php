@@ -30,6 +30,10 @@ class Algolia_Usermeta_Changes_Watcher implements Algolia_Changes_Watcher {
 	}
 
 	public function watch() {
+		// Fires immediately after profile or photo is updated.
+		add_action( 'personal_options_update', array( $this, 'sync_item' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'sync_item') );
+
 		// Fires immediately after an existing user is updated.
 		add_action( 'profile_update', array( $this, 'sync_item' ) );
 
